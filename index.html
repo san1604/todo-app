@@ -8,10 +8,16 @@
     <body>
         <h1>Welcome to the todo app</h1>
         <input type="text" id="todoInput" placeholder="Add todo title here...." required/>
-        <button onclick="addToDo()" id="addBtn">Add to-do</button>
-        <ul id="todoList">
-            
-        </ul>
+        <button onclick="addToDo()">Add to-do</button>
+        <button onclick="deleteToDo()" id="">Delete To-Do</button>
+        <ol id="todoList">
+            <!-- <li>
+                <input type="checkbox"/>
+                <label for="todo1">Todo 1</label>
+                <button>Edit</button>
+                <button>Delete</button>
+            </li> -->
+        </ol>
         <!-- <form action="addToDo()">
             <input type="text" id="todoInput" placeholder="Add todo title here...." required/>
             <input type="submit" value="Add to-do" />
