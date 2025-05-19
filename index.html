@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <script src="jquery-3.7.1.js"></script>
+    <script src="todo.js">
+    </script>
+</head>
+
+<body>
+    <h1>Welcome to todo app</h1>
+    <!-- Button to add a todo -->
+    <!-- <form action="addTodo()">
+            <input 
+            type="text" 
+            placeholder="Add todo title here..." 
+            id="todoInput" required/>
+            <input type="submit" value="Add To-do"/>
+        </form> -->
+    <input type="text" placeholder="Add todo title here..." id="todoInput" required />
+    <button type="submit" onclick="addTodo()">Add To-do</button>
+    <ol id="todoList">
+        <!-- <li>
+                <input type="checkbox" onclick="onTodoComplete(this)"/>
+                <label>Todo 1</label>
+                <button>Edit</button>
+                <button>Delete</button>
+            </li> -->
+    </ol>
+</body>
+
+</html>
+<!-- <form action="addToDo()">
+<html>
     <head>
         <script src="todo.js">
 
@@ -11,16 +43,15 @@
         <button onclick="addToDo()">Add to-do</button>
         <button onclick="deleteToDo()" id="">Delete To-Do</button>
         <ol id="todoList">
-            <!-- <li>
-                <input type="checkbox"/>
+                <li>
+                <input type="checkbox" onclick="onToDoComplete(this)"/>
                 <label for="todo1">Todo 1</label>
                 <button>Edit</button>
                 <button>Delete</button>
-            </li> -->
+            </li> 
         </ol>
-        <!-- <form action="addToDo()">
             <input type="text" id="todoInput" placeholder="Add todo title here...." required/>
             <input type="submit" value="Add to-do" />
-        </form> -->
-    </body>
-</html>
+        </body>
+        </html>
+    </form> -->
