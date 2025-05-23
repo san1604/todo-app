@@ -1,4 +1,4 @@
-$(document).ready(function() 
+$(function() 
 {
     updateFrontend()
 });
@@ -49,6 +49,30 @@ function addTodo()
     }
     updateFrontend()
 }
+function deleteTodo()
+{
+    console.log("Delete Todo!!")
+    let todoInput = document.getElementById("todoInput")
+    console.log(todoInput)
+    console.log(todoInput.value)
+    if(todoInput.value.trim() == "")
+    {
+        alert("Todo title cannot be blank!!!")
+    }
+    else
+    {
+        console.log(todoListArray)
+        todoListArray.pop({
+            id: ++count,
+            todo: todoInput.value,
+            completed: false
+        })
+        console.log(todoListArray)
+    }
+    updateFrontend()
+}
+var editingTodoFlag = -1
+
 
 function updateFrontend()
 {
@@ -58,10 +82,33 @@ function updateFrontend()
     {
         // todoList.innerHTML += "<li>"+todoListArray[index]+"</li>"
         if(todoListArray[index].completed)
-            todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")' checked/><label>"+todoListArray[index].todo+"</label><button>Edit</button><button>Delete</button></li>"
+            todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")' checked/><label><s>"+todoListArray[index].todo+"</s></label><button onclick = 'onEditToDo("+todoListArray[index].id+")'>Edit</button><button onclick = 'onDeleteToDo("+todoListArray[index].id+")'>Delete</button></li>"
+        else if(editingTodoFlag == todoListArray[index].id){
+            todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")'/><input value = "+todoListArray[index].todo+" id = 'editingTodo'></input><button onclick = 'saveToDo("+todoListArray[index].id+")'>Save To-Do</button><button onclick = 'onDeleteToDo("+todoListArray[index].id+")'>Delete</button></li>"
+        }
         else
-            todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")'/><label>"+todoListArray[index].todo+"</label><button>Edit</button><button>Delete</button></li>"
+             todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")'/><label>"+todoListArray[index].todo+"</label><button onclick = 'onEditToDo("+todoListArray[index].id+")'>Edit</button><button onclick = 'onDeleteToDo("+todoListArray[index].id+")'>Delete</button></li>"
     }
+}
+function onEditToDo(todoID) {
+  console.log("Editing ID: ", todoID);
+  editingTodoFlag = todoID
+  updateFrontend()
+}
+function saveToDo(todoID){
+  console.log("Saving this: ", todoID);
+  let updatedToDoText = document.getElementById("editingTodo").value
+  console.log(updatedToDoText);
+  
+  todoListArray = todoListArray.map ((todoObj) => {
+      if(todoID == todoObj.id){
+        todoObj.todo = updatedToDoText
+      }
+      return todoObj
+  })
+  editingTodoFlag = -1
+  updateFrontend()
+
 }
 
 function onTodoComplete(checkbox, todoID)
@@ -90,9 +137,13 @@ function onTodoComplete(checkbox, todoID)
     //update the Frontend
     updateFrontend()
 }
-
-
-
+function onDeleteToDo(todoID) {
+  console.log("ID to be deleted: ", todoID);
+  todoListArray = todoListArray.filter((todoObj) =>{
+    return !(todoID == todoObj.id)
+  })
+  updateFrontend()
+}
 
 
 
