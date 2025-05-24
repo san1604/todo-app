@@ -55,12 +55,12 @@ function deleteTodo()
     let todoInput = document.getElementById("todoInput")
     console.log(todoInput)
     console.log(todoInput.value)
-    if(todoInput.value.trim() == "")
-    {
-        alert("Todo title cannot be blank!!!")
-    }
-    else
-    {
+    // if(todoInput.value.trim() == "")
+    // {
+        // alert("Todo title cannot be blank!!!")
+    // }
+    // else
+    // {
         console.log(todoListArray)
         todoListArray.pop({
             id: ++count,
@@ -68,8 +68,9 @@ function deleteTodo()
             completed: false
         })
         console.log(todoListArray)
-    }
-    updateFrontend()
+        updateFrontend()
+    // }
+    
 }
 var editingTodoFlag = -1
 
