@@ -1,14 +1,18 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <title>To-Do App</title>
     <script src="jquery-3.7.1.js"></script>
     <script src="todo.js">
     </script>
 </head>
 
 <body>
-    <h1>Welcome to todo app</h1>
+    <div style="text-align: center;">
+        <h1 style="padding-bottom: 250px;">To-do app</h1>
+    <!-- <p>No todos added yet</p> -->
     <!-- Button to add a todo -->
     <!-- <form action="addTodo()">
             <input 
@@ -18,7 +22,7 @@
             <input type="submit" value="Add To-do"/>
         </form> -->
     <input type="text" placeholder="Add todo title here..." id="todoInput" required />
-    <button type="submit" onclick="addTodo()">Add To-do</button>
+    <!-- <button type="submit" onclick="addTodo()"> + Add To-do</button> -->
     <button type="button" onclick="deleteTodo()">Delete To-Do</button>
     <ol id="todoList">
         <!-- <li>
@@ -28,6 +32,7 @@
                 <button>Delete</button>
             </li> -->
     </ol>
+    </div>
 </body>
 
 </html>

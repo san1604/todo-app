@@ -5,26 +5,26 @@ $(function()
 // console.log("Hello")
 var count = 0
 var todoListArray = [
-    {
-        id: ++count,
-        todo: "Todo 1",
-        completed: false
-    }, 
-    {
-        id: ++count,
-        todo: "Todo 2",
-        completed: false
-    },
-    {
-        id: ++count,
-        todo: "Todo 3",
-        completed: false
-    },
-    {
-        id: ++count,
-        todo: "Todo 4",
-        completed: false
-    }
+    // {
+    //     id: ++count,
+    //     todo: "Todo 1",
+    //     completed: false
+    // }, 
+    // {
+    //     id: ++count,
+    //     todo: "Todo 2",
+    //     completed: false
+    // },
+    // {
+    //     id: ++count,
+    //     todo: "Todo 3",
+    //     completed: false
+    // },
+    // {
+    //     id: ++count,
+    //     todo: "Todo 4",
+    //     completed: false
+    // }
 ]
 
 function addTodo()
@@ -78,17 +78,23 @@ var editingTodoFlag = -1
 function updateFrontend()
 {
     let todoList = document.getElementById("todoList")
+    let filter = document.getElementById("filterSelect")?.value || "all";
+    let filteredTodos = todoListArray.filter(todo => {
+    if (filter === "completed") return todo.completed;
+    if (filter === "incomplete") return !todo.completed;
+    return true;
+    });
     todoList.innerHTML = ""
-    for(let index = 0; index<todoListArray.length; index++)
+    for(let index = 0; index<filteredTodos.length; index++)
     {
         // todoList.innerHTML += "<li>"+todoListArray[index]+"</li>"
-        if(todoListArray[index].completed)
-            todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")' checked/><label><s>"+todoListArray[index].todo+"</s></label><button onclick = 'onEditToDo("+todoListArray[index].id+")'>Edit</button><button onclick = 'onDeleteToDo("+todoListArray[index].id+")'>Delete</button></li>"
-        else if(editingTodoFlag == todoListArray[index].id){
-            todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")'/><input value = "+todoListArray[index].todo+" id = 'editingTodo'></input><button onclick = 'saveToDo("+todoListArray[index].id+")'>Save To-Do</button><button onclick = 'onDeleteToDo("+todoListArray[index].id+")'>Delete</button></li>"
+        if(filteredTodos[index].completed)
+            todoList.innerHTML += "<li id="+filteredTodos[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+filteredTodos[index].id+")' checked/><label><s>"+filteredTodos[index].todo+"</s></label><button onclick = 'onEditToDo("+filteredTodos[index].id+")'>Edit</button><button onclick = 'onDeleteToDo("+filteredTodos[index].id+")'>Delete</button></li>"
+        else if(editingTodoFlag == filteredTodos[index].id){
+            todoList.innerHTML += "<li id="+filteredTodos[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+filteredTodos[index].id+")'/><input value = "+filteredTodos[index].todo+" id = 'editingTodo'></input><button onclick = 'saveToDo("+filteredTodos[index].id+")'>Save To-Do</button><button onclick = 'onDeleteToDo("+filteredTodos[index].id+")'>Delete</button></li>"
         }
         else
-             todoList.innerHTML += "<li id="+todoListArray[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+todoListArray[index].id+")'/><label>"+todoListArray[index].todo+"</label><button onclick = 'onEditToDo("+todoListArray[index].id+")'>Edit</button><button onclick = 'onDeleteToDo("+todoListArray[index].id+")'>Delete</button></li>"
+             todoList.innerHTML += "<li id="+filteredTodos[index].id+"><input type='checkbox'  onclick='onTodoComplete(this, "+filteredTodos[index].id+")'/><label>"+filteredTodos[index].todo+"</label><button onclick = 'onEditToDo("+filteredTodos[index].id+")'>Edit</button><button onclick = 'onDeleteToDo("+filteredTodos[index].id+")'>Delete</button></li>"
     }
 }
 function onEditToDo(todoID) {
